@@ -1,5 +1,17 @@
 # Cmake 사용법
 
+## 기본적인 CMakeList
+```cmake
+cmake_minimum_required(VERSION 3.28)
+project(Project1)
+set(CMAKE_CXX_STANDARD 20)
+add_executable(HelloWorld main.cpp)
+```
+- cmake_minimum_required: CMakeLists.txt를 실행 하기 위해 필요한 CMake의 최소 버전을 지정한다.
+- set(...): 사용할 C++의 버전을 지정한다.
+- project(...): IDE에서 사용할 프로젝트 이름을 지정한다.
+- add_executable: 실행 파일의 이름을 지정한다.
+
 ## 순서
 1. "CMakeLists.txt" 파일을 작성한다.
 2. 프로그래밍: .cc파일(.cpp)과 .h파일들을 프로젝트 디렉토리에 코딩한다.
@@ -17,21 +29,21 @@ cmake -S <소스코드들이 있는 위치(프로젝트 디렉토리)> -B <결�
 - 해당 CMakeLists.txt 파일을 읽을수 있는 최소한의 CMake 버전을 지정한다.
 - 생략해도 괜찮다.
 
-```bash
+```cmake
 cmake_minimum_required(VERSION 3.28.1)
 ```
 
 ### 프로젝트 이름 설정
 - 최종으로 완성되는 실행 파일의 이름을 설정한다.
 
-```bash
+```cmake
 project(OrbitalStrike)
 ```
 
 ### 변수 선언
 - [set()](https://cmake.org/cmake/help/v2.8.12/cmake.html#command:set)
 
-```bash
+```cmake
 set(birth_year 1995) # 숫자 변수 선언
 set(name "Yeongu") # 문자열 변수 선언
 set(isTrue 1) # Boolean 변수 선언
@@ -76,7 +88,7 @@ endif ()
 
 #### 숫자 비교
 
-```bash
+```cmake
 set(integer_number 1)
 
 if (integer_number LESS 0) # <
@@ -93,7 +105,7 @@ endif ()
 
 #### 기본 foreach문
 
-```bash
+```cmake
 set(myList 100 200 300 400 500)
 
 foreach (element ${myList})
@@ -103,7 +115,7 @@ endforeach ()
 
 #### RANGE를 사용하는 foreach문
 
-```bash
+```cmake
 foreach (i RANGE 1 10 1) # 시작; 끝(포함); 추가 하는 수
     message(${i})
 endforeach ()
@@ -111,7 +123,7 @@ endforeach ()
 
 #### IN을 사용하는 foreach문
 
-```bash
+```cmake
 set(myList 100 200 300 400 500)
 
 foreach (element IN LISTS myList)
@@ -123,7 +135,7 @@ endforeach ()
 - [while()](https://cmake.org/cmake/help/latest/command/while.html)
 - while문은 숫자 연산을 사용해야 한다.
 - 
-```bash
+```cmake
 set(counter 1)
 
 while (counter LESS 5)
@@ -136,7 +148,7 @@ endwhile ()
 - [math()](https://cmake.org/cmake/help/latest/command/math.html)
 
 #### 10을 곱하기
-```bash
+```cmake
 set(initial_number 10)
 message("Input: ${initial_number}")
 math(EXPR initial_number "${initial_number}*10")
@@ -153,7 +165,7 @@ message("Output: ${initial_number}")
 - [macro()](https://cmake.org/cmake/help/latest/command/macro.html)
 
 #### 3개의 숫자를 더하는 함수
-```bash
+```cmake
 # 함수명 매개변수1 매개변수2 매개변수3 반환변수
 macro(adding_three_numbers num1 num2 num3 output)
     # num1, num2, num3의 합을 output 매개 변수에 할당
@@ -179,7 +191,7 @@ message(${result})
 - [function()](https://cmake.org/cmake/help/latest/command/function.html)
 
 #### 3개의 숫자를 곱하는 함수
-```bash
+```cmake
 function(multiply_three_numbers num1 num2 num3 output)
     # local 변수 temp를 만든다.
     set(temporary_variable 0)
@@ -206,7 +218,7 @@ message("${A}×${B}×${C}=${result}")
 - 파일 경로를 저장하는 리스트는 set으로 만들면 사용할 수 없다.
 -  [file(GLOB)](https://cmake.org/cmake/help/latest/command/file.html#glob)
 
-```bash
+```cmake
 file(GLOB file_list src/*.cc src/*.hpp)
 ```
 
@@ -215,7 +227,7 @@ file(GLOB file_list src/*.cc src/*.hpp)
 - 만약에 파일이 존재 하지 않으면, 새로운 파일을 만든다.
 
 #### note.txt 파일에 Hello World라고 쓰기
-```bash
+```cmake
 file(WRITE note.txt "Hello world")
 ```
 
@@ -224,7 +236,7 @@ file(WRITE note.txt "Hello world")
 
 #### 비둘기와 참새 디렉토리 만들기
 
-```bash
+```cmake
 file(MAKE_DIRECTORY 비둘기 참새)
 ```
 
@@ -233,13 +245,13 @@ file(MAKE_DIRECTORY 비둘기 참새)
 
 #### note.txt 파일을 Desktop 디렉토리에 복사
 
-```bash
+```cmake
 file(COPY note.txt DESTINATION Desktop)
 ```
 
 #### Desktop 디렉토리를 Downloads 디렉토리에 복사
 
-```bash
+```cmake
 file(COPY Desktop DESTINATION Downloads)
 ```
 
@@ -248,7 +260,7 @@ file(COPY Desktop DESTINATION Downloads)
 
 #### 비둘기와 참새 디렉토리 삭제
 
-```bash
+```cmake
 file(REMOVE_RECURSE 비둘기 참새)
 ```
 
@@ -256,7 +268,7 @@ file(REMOVE_RECURSE 비둘기 참새)
 - 결과물로 나오는 실행 파일과 해당 실행 파일을 만드는 재료가 되는 소스 코드 파일들을 설정해 주어야 한다.
 - [add_executable](https://cmake.org/cmake/help/latest/command/add_executable.html)
 
-```bash
+```cmake
 add_executable(${PROJECT_NAME} ${file_list})
 ```
 
@@ -264,7 +276,7 @@ add_executable(${PROJECT_NAME} ${file_list})
 - 결과물로 나오는 라이브러리 파일과 해당 라이브러리를 만드는 재료가 되는 소스 코드 파일들을 설정해 주어야 한다.
 - [add_library()](https://cmake.org/cmake/help/latest/command/add_library.html)
 
-```bash
+```cmake
 add_library(${PROJECT_NAME} source_file.cc)
 ```
 
@@ -273,7 +285,7 @@ add_library(${PROJECT_NAME} source_file.cc)
 - [include()](https://cmake.org/cmake/help/latest/command/include.html)
 - 모듈을 가져오 다른 cmake 모듈에 있는 function 또는 macro를 사용할 수 있다.
 
-```bash
+```cmake
 include(arithematic_module.cmake)
 ```
 
@@ -285,7 +297,7 @@ include(arithematic_module.cmake)
 
 ### CMake가 헤더 파일을 찾는 디렉토리 추가
 
-```bash
+```cmake
 include_directories(desktop downloads)
 ```
 
@@ -295,7 +307,7 @@ include_directories(desktop downloads)
 ### 특정 target만 헤더 파일을 찾는 디렉토리를 추가하는 방법
 - [include_directores와 차이점](https://stackoverflow.com/questions/31969547/what-is-the-difference-between-include-directories-and-target-include-directorie)
 
-```bash
+```cmake
 target_include_directories(${PROJECT_NAME} PUBLIC HOME) # HOME 디렉토리에서 헤더 파일을 찾는다
 ```
 
@@ -320,14 +332,14 @@ target_include_directories(${PROJECT_NAME} PUBLIC HOME) # HOME 디렉토리에�
 - CMakeList.txt 안에 있는 모든 target들이 사용할수 있다.
 - [link_libraries](https://cmake.org/cmake/help/latest/command/link_libraries.html)
 
-```bash
+```cmake
 link_libraries(Desktop/libraries)
 ```
 ### 특정 target만 라이브러리 파일을 찾는 디렉토리 추가
 - link_libraries 보다 최신의 기술이다.
 - [target_link_libraries](https://cmake.org/cmake/help/latest/command/target_link_libraries.html)
 
-```bash
+```cmake
 target_include_directories(${PROJECT_NAME} PUBLIC src/graphics-library src/music-library)
 ```
 
@@ -339,7 +351,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC src/graphics-library src/music
 
 ##### OpenGL을 찾기
 
-```bash
+```cmake
 find_package(OpenGL REQUIRED)
 ```
 
@@ -354,7 +366,7 @@ endif ()
 #### 방법2. PkgConfig를 사용해서 라이브러리 찾
 - MacOS와 Linux에서는 PkgConfig를 이용해서 시스템에 설치된 라이브러리를 찾을 수도 있다.
 
-```bash
+```cmake
 find_package(PkgConfig REQUIRED)
 
 pkg_search_module(OpenGL REQUIRED opengl)
@@ -365,8 +377,6 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${OpenGL_INCLUDE_DIRS})
 # 라이브러리 디렉토리 추가
 target_link_libraries(${PROJECT_NAME} ${OpenGL_LIBRARIES})
 ```
-
-
 ---
 
 # 추가 할 내용
