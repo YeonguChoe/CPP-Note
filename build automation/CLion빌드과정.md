@@ -14,7 +14,7 @@ cmake -D CMAKE_BUILD_TYPE=Debug -D CMAKE_MAKE_PROGRAM=<경로>/ninja -G Ninja -S
 
 - 예
 ```bash
-cmake -D CMAKE_BUILD_TYPE=Debug -D CMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/aarch64/ninja -G Ninja -B cmake-build-debug
+cmake -D CMAKE_BUILD_TYPE=Debug -D CMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/aarch64/ninja -G Ninja -S . -B cmake-build-debug
 ```
 
 ## 실행 파일 빌드
@@ -25,4 +25,29 @@ cmake --build <생성된 빌드 파일이 위치한 경로> --target <add_execut
 - `--target`: CMakeLists.txt에 있는 빌드 대상을 지정한다.
 - `-j`: CPU가 병렬로 빌드 작업을 하도록 한다.
 
+## Release With Debug Information 빌드
+```bash
+cmake -D CMAKE_BUILD_TYPE=RelWithDebInfo -D CMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/aarch64/ninja -G Ninja -S . -B cmake-build-relwithdebinfo
+```
+- 디버그 정보를 포함하는 최적화된 Release 빌드를 한다.
 
+## Release 빌드
+```bash
+cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/aarch64/ninja -G Ninja -S . -B cmake-build-release
+```
+- 디버깅 정보를 아예 포함하지않고 최적화된 빌드를 한다.
+
+## Minimum Size Release 빌드
+```bash
+cmake -D CMAKE_BUILD_TYPE=MinSizeRel -D CMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/aarch64/ninja -G Ninja -S . -B cmake-build-minsizerel
+```
+- 필요한 모든 기능들을 포함하면서, 실행 파일의 크기를 최소로 하는 빌드를 한다.
+
+## Default 빌드
+```bash
+cmake -D CMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/aarch64/ninja -G Ninja -B cmake-build-default
+```
+- 빌드 타입을 지정하지 않으면 Release 빌드를 한다.
+
+## 파일 크기
+$$ \text{MinSizeRel} < \text{Release} < \text{RelWithDebInfo} < \text{Debug}$$
