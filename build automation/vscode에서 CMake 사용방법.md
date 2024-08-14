@@ -10,7 +10,7 @@ set(CMAKE_CXX_STANDARD 11) # C++ 코드의 문법 버전
 set(SOURCE_FILES main.cpp) # 소스 코드
 add_executable(program ${SOURCE_FILES}) # 생성되는 실행 파일의 이름과 소스 파일
 ```
-3. `>CMake: Quick Start` 실행만 하고 진행하지 않기.
+3. 왼쪽 CMake 탭에서 Configure 클릭
 
 ## 빌드 단축키
 - MacOS: Shift + F5
