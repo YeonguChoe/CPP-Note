@@ -1,5 +1,11 @@
 # C++
 
+## 다른 언어 사용방법
+1. Python: [Python/C API 사용](https://docs.python.org/3/c-api/index.html)
+2. Java: JNI 사용
+3. JavaScript: [V8엔진 사용](https://v8.dev/docs)
+4. Go: cgo 사용
+
 ## 문법
 1. [자료형](content/Data%20type.md)
 1. [제어 흐름](/content/Control%20flow.md)
