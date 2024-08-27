@@ -19,15 +19,14 @@
 
 1. [Make](build%20automation/Make.md)
 1. [CMake](build%20automation/CMake.md)
-1. Ninja
 
 ## 디버거
 
 1. [LLDB](debugger/LLDB.md)
-1. GDB
+1. ~~GDB~~
 
 ## 메모리 누수 탐지기
-1. Valgrind: x86/x64 CPU 아키텍처에서만 사용 가능
+1. ~~Valgrind~~: x86/x64 CPU 아키텍처에서만 사용 가능
 
 ## 라이브러리
 1. Mutex
