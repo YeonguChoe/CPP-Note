@@ -1,5 +1,4 @@
 # C++
-> Only use Visual Studio and don't care about build automation
 
 ## Built-in data Structure
 - [Array](Array.md)
